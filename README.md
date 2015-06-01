@@ -6,7 +6,7 @@ Processing sketches for the *Biogames Workshop*.
 
 ##  EOS Webcam Demo
 
-The [EOS Webcam demo]() shows how to get live video from the EOS camera we have mounted on our microscope.  The sketch lets you zoom into a predefined area and process it with OpenCV.
+The [EOS Webcam Demo](eos_webcam_demo) shows how to get live video from the EOS camera we have mounted on our microscope.  The sketch lets you zoom into a predefined area and process it with OpenCV.
 
 ### Usage
 Press space to toggle between overview and image processing mode.
