@@ -47,7 +47,7 @@ boolean overview = true;
 
 public void setup() {
 
-  size(camWidth, camHeight);
+  size(camWidth, camHeight, P3D);
 
   if (!debug) {
     // use the eos webcam
