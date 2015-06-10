@@ -1,6 +1,6 @@
 # Biogames Workshop
 
-Processing sketches for the *Biogames Workshop*.
+Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien/wiki/Workshop_on_BioGames)*.
 
 ## TrackEuglenaSyphonOSC
 
