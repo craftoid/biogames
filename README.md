@@ -2,7 +2,9 @@
 
 Processing sketches for the *Biogames Workshop*.
 
+## TrackEuglenaSyphonOSC
 
+[TrackEuglenaSyphonOSC](TrackEuglenaSyphonOSC) provides some simple tracking of Euglena gracilis through the EOS camera and microscope. Camera connection based on [EOS Webcam Demo](eos_webcam_demo).
 
 ##  EOS Webcam Demo
 
