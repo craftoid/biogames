@@ -94,7 +94,6 @@ public void draw() {
     
     opencv.erode();
     opencv.dilate();
-    opencv.dilate();
     
     threshold = int(map(mouseX,0,width,0,255));
     opencv.threshold(threshold);
