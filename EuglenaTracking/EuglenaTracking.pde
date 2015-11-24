@@ -24,10 +24,10 @@ ControlP5 guiControl;
 int syphonWidth = 1024;
 int syphonHeight = 680;
 
-int webcamWidth = 640;//1920;
-int webcamHeight = 480;//1080;
+int webcamWidth = 1920;
+int webcamHeight = 1080;
 
-String filename = "_DSC2280.mov";
+String filename = "";
 
 PImage inputImage;
 PGraphics canvas;
@@ -46,9 +46,12 @@ float mdx = 0;  // mean x-movement
 float mdy = 0;  // mean y-movement
 
 public void setup() {
-  fullScreen();
-  input = new VideofileInput(this, filename);
-  opencv = new OpenCV(this, 1920, 1080);
+  size(displayWidth, displayHeight, P3D);
+  surface.setResizable(true);
+  //input = new VideofileInput(this, filename);
+  //opencv = new OpenCV(this, 1920, 1080);
+  input = new CameraInput(this, webcamWidth, webcamHeight);
+  opencv = new OpenCV(this, webcamWidth, webcamHeight);
   euglenaList = new ArrayList<Euglena>();
   oscP5 = new OscP5(this, 8001);
   oscTargetHost = new NetAddress(oscTargetIP, 8000);
@@ -70,17 +73,17 @@ public void draw() {
 
   /*
   pushMatrix();
-  scale(1,-1);
-  image(cam, 0, -height);
-  image(cam, 0, 0);
-  popMatrix();
-  */
-  
+   scale(1,-1);
+   image(cam, 0, -height);
+   image(cam, 0, 0);
+   popMatrix();
+   */
+
   pushMatrix();
   if (inputImage.width < width || inputImage.height < height) {
-    translate((width-inputImage.width)/2,(height-inputImage.height)/2);
+    translate((width-inputImage.width)/2, (height-inputImage.height)/2);
   }
-  
+
   if (displayInput) image(inputImage, 0, 0);
   else image(opencv.getOutput(), 0, 0);
 
@@ -119,7 +122,7 @@ public void draw() {
   checkEuglena();
   updateGUILabels();
   popMatrix();
-  
+
   sendOSCData();
 }
 
@@ -127,7 +130,7 @@ void sendOSCData() {
   OscMessage mdxy = new OscMessage("/meand");
   mdxy.add(new float[] { mdx, mdy });
   oscP5.send(mdxy, oscTargetHost);
-  
+
   int[] eids = new int[euglenaList.size()];
   float[] exs = new float[euglenaList.size()];
   float[] eys = new float[euglenaList.size()];

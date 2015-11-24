@@ -47,7 +47,7 @@ void createGUI() {
     .addItem("File: "+filename, 0)
     .addItem("Webcam", 1)
     .addItem("Syphon", 2)
-    .activate(0);
+    .activate(1);
   guiControl.addNumberbox("syphonWidth")
     .setPosition(20, 390)
     .setSize(60, 20)
