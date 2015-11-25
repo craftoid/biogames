@@ -2,6 +2,10 @@
 
 Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien/wiki/Workshop_on_BioGames)*.
 
+## EuglenaTracking
+
+[EuglenaTracking](EuglenaTracking) provides tracking of Euglena via Syphon, Webcam or video file. Broadcasts mean Euglena x/y motion as well as position and ID number of all Euglena via OSC.
+
 ## TrackEuglenaSyphonOSC
 
 [TrackEuglenaSyphonOSC](TrackEuglenaSyphonOSC) provides some simple tracking of Euglena gracilis through the EOS camera and microscope. Camera connection based on [EOS Webcam Demo](eos_webcam_demo).
