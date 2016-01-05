@@ -1,12 +1,8 @@
-# Biogames Workshop
-
-Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien/wiki/Workshop_on_BioGames)*.
-
-## EuglenaTracking
+# EuglenaTracking
 
 [EuglenaTracking](EuglenaTracking) provides tracking of Euglena via Syphon, Webcam or video file. Broadcasts mean Euglena x/y motion as well as position and ID number of all Euglena via OSC.
 
-# Installation
+### Installation
 - Download Processing
 - Download github zip (biogames-master.zip) 
 - In Processing
@@ -16,6 +12,10 @@ Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien
   - Download https://github.com/atduskgreg/opencv-processing/releases/download/latest/opencv_processing.zip
   - Place folder from zip in Processing libraries folder (e.g. Documents/Processing/libraries/)
   - Restart(!) Processing
+  
+# Biogames Workshop
+
+Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien/wiki/Workshop_on_BioGames)*.
 
 ## TrackEuglenaSyphonOSC (old)
 
