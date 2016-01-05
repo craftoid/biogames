@@ -6,11 +6,22 @@ Processing sketches for the *[Biogames Workshop](http://www.uni-weimar.de/medien
 
 [EuglenaTracking](EuglenaTracking) provides tracking of Euglena via Syphon, Webcam or video file. Broadcasts mean Euglena x/y motion as well as position and ID number of all Euglena via OSC.
 
-## TrackEuglenaSyphonOSC
+# Installation
+- Download Processing
+- Download github zip (biogames-master.zip) 
+- In Processing
+  - open EuglenaTracking/EuglenaTracking.pde
+  - Sketch/Libraries/Import Library.../Add Library...: oscP5, Syphon, Video, controlP5 (and openCV if possible)
+- Alternative openCV installation (e.g. on Mac OS): 
+  - Download https://github.com/atduskgreg/opencv-processing/releases/download/latest/opencv_processing.zip
+  - Place folder from zip in Processing libraries folder (e.g. Documents/Processing/libraries/)
+  - Restart(!) Processing
+
+## TrackEuglenaSyphonOSC (old)
 
 [TrackEuglenaSyphonOSC](TrackEuglenaSyphonOSC) provides some simple tracking of Euglena gracilis through the EOS camera and microscope. Camera connection based on [EOS Webcam Demo](eos_webcam_demo).
 
-##  EOS Webcam Demo
+##  EOS Webcam Demo (old)
 
 The [EOS Webcam Demo](eos_webcam_demo) shows how to get live video from the EOS camera we have mounted on our microscope.  The sketch lets you zoom into a predefined area and process it with OpenCV.
 
