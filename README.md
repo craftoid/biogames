@@ -4,7 +4,7 @@
 
 ### Installation
 - Download Processing
-- Download github zip (biogames-master.zip) 
+- Download github zip (https://github.com/lscherff/biogames/archive/master.zip) 
 - In Processing
   - open EuglenaTracking/EuglenaTracking.pde
   - Sketch/Libraries/Import Library.../Add Library...: oscP5, Syphon, Video, controlP5 (and openCV if possible)
