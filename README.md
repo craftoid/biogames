@@ -1,5 +1,7 @@
 # EuglenaTracking
 
+![Euglena tracking GUI screenshot](http://www.khm.de/~lscherff/biogaming/euglenatracking.png)
+
 [EuglenaTracking](EuglenaTracking) provides tracking of Euglena via Syphon, Webcam or video file. Broadcasts mean Euglena x/y motion as well as position and ID number of all Euglena via OSC.
 
 ### Installation
@@ -12,6 +14,9 @@
   - Download https://github.com/atduskgreg/opencv-processing/releases/download/latest/opencv_processing.zip
   - Place folder from zip in Processing libraries folder (e.g. Documents/Processing/libraries/)
   - Restart(!) Processing
+
+### Note
+[EuglenaTracking](EuglenaTracking) assumes that a full HD webcam is connected at startup. This is considered a bug and will be fixed soon.
   
 # Biogames Workshop
 
