@@ -24,7 +24,7 @@ void findClosestEuglena(Contour c) {
     closest.x = r.x;
     closest.y = r.y;
   } else {
-    euglenaList.add(new Euglena(r.x, r.y, ++euglenaCounter));
+    euglenaList.add(new Euglena(r.x, r.y, r.width, r.height, ++euglenaCounter));
     //print(euglenaCounter+", ");
   }
 }
@@ -55,13 +55,17 @@ void checkEuglena() {
 }
 
 class Euglena {
-  public Euglena(float x, float y, int id) {
+  public Euglena(float x, float y, int width, int height, int id) {
     this.x = x;
     this.y = y;
+    this.width = width;
+    this.height = height;
     this.id = id;
   }
   float x;
   float y;
+  int width;
+  int height;
   float dx;
   float dy;
   int id;

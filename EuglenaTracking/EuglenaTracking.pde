@@ -1,7 +1,7 @@
 /**
  Simple Euglena tracking. 
  Using a video file, webcam or Syphon (for microscope live footage) as input source. (Using https://github.com/craftoid/biogames/tree/master/eos_webcam_demo )
- Sending mean x-/y-motion and positions of all Euglena via OSC
+ Sending mean x-/y-motion and positions, speed and size of all Euglena via OSC
  */
 import oscP5.*;
 import netP5.*;
@@ -17,7 +17,7 @@ OpenCV opencv;
 
 OscP5 oscP5;
 NetAddress oscTargetHost;
-String oscTargetIP = "141.54.53.212";
+String oscTargetIP = "127.0.0.1";
 
 ControlP5 guiControl;
 
@@ -48,10 +48,13 @@ float mdy = 0;  // mean y-movement
 public void setup() {
   size(displayWidth, displayHeight, P3D);
   surface.setResizable(true);
+  // uncomment for startup input device of your choice
   //input = new VideofileInput(this, filename);
   //opencv = new OpenCV(this, 1920, 1080);
-  input = new CameraInput(this, webcamWidth, webcamHeight);
-  opencv = new OpenCV(this, webcamWidth, webcamHeight);
+  //input = new CameraInput(this, webcamWidth, webcamHeight);
+  //opencv = new OpenCV(this, webcamWidth, webcamHeight);
+  input = new InputDevice();
+  opencv = new OpenCV(this, width, height);
   euglenaList = new ArrayList<Euglena>();
   oscP5 = new OscP5(this, 8001);
   oscTargetHost = new NetAddress(oscTargetIP, 8000);
@@ -62,8 +65,13 @@ public void setup() {
 public void draw() {
   background(0);
   inputImage = input.getNextImage();
-  if (inputImage == null) return;
+  if (inputImage != null) {
+    trackEuglena();
+  }
+  updateGUILabels();
+}
 
+void trackEuglena() {
   opencv.loadImage(inputImage);
   opencv.gray();
   opencv.invert();
@@ -120,7 +128,6 @@ public void draw() {
     }
   }
   checkEuglena();
-  updateGUILabels();
   popMatrix();
 
   sendOSCData();
@@ -131,23 +138,17 @@ void sendOSCData() {
   mdxy.add(new float[] { mdx, mdy });
   oscP5.send(mdxy, oscTargetHost);
 
-  int[] eids = new int[euglenaList.size()];
-  float[] exs = new float[euglenaList.size()];
-  float[] eys = new float[euglenaList.size()];
-  int i=0;
   for (Euglena e : euglenaList) {
-    eids[i] = e.id;
-    exs[i] = e.x;
-    eys[i] = e.y;
-    i++;
+    float[] euglenaOSCdata = new float[7];
+    euglenaOSCdata[0] = e.id;
+    euglenaOSCdata[1] = e.x;
+    euglenaOSCdata[2] = e.y;
+    euglenaOSCdata[3] = e.width;  // width of bounding box
+    euglenaOSCdata[4] = e.height;  // height of bounding box
+    euglenaOSCdata[5] = e.dx;  // dx
+    euglenaOSCdata[6] = e.dy;  // dy
+    OscMessage euglenaMSG = new OscMessage("/euglena");
+    euglenaMSG.add(euglenaOSCdata);
+    oscP5.send(euglenaMSG, oscTargetHost);
   }
-  OscMessage eid = new OscMessage("/euglena/id");
-  eid.add(eids);
-  oscP5.send(eid, oscTargetHost);
-  OscMessage ex = new OscMessage("/euglena/x");
-  ex.add(exs);
-  oscP5.send(ex, oscTargetHost);
-  OscMessage ey = new OscMessage("/euglena/y");
-  ey.add(eys);
-  oscP5.send(ey, oscTargetHost);
 }

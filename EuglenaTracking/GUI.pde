@@ -46,8 +46,7 @@ void createGUI() {
     .setNoneSelectedAllowed(false)
     .addItem("File: "+filename, 0)
     .addItem("Webcam", 1)
-    .addItem("Syphon", 2)
-    .activate(1);
+    .addItem("Syphon", 2);
   guiControl.addNumberbox("syphonWidth")
     .setPosition(20, 390)
     .setSize(60, 20)
@@ -84,12 +83,12 @@ void createGUI() {
   guiControl.end();
 }
 
+boolean fileDialogTrigger = false;
 
 void inputSelector(int a) {
   switch (a) {
   case 0:
-    input.stop();
-    selectInput("Select video file:", "fileSelected");
+    fileDialogTrigger= true; 
     break;
   case 1:
     input.stop();
@@ -101,7 +100,16 @@ void inputSelector(int a) {
   case 2:
     input.stop();
     input = new EOSInput(this);
+    euglenaList = new ArrayList<Euglena>();
     break;
+  }
+}
+
+/** Necessary because inputSelector is called again on next click if no mouseReleased has been registers -- which happens when a file dialog is directly opened by inputSelector :( */
+void mouseReleased() {
+  if (fileDialogTrigger) {
+    fileDialogTrigger = false;
+    selectInput("Select video file:", "fileSelected");
   }
 }
 
@@ -113,6 +121,7 @@ void fileSelected(File selection) {
   if (selection == null) {
     println("Window was closed or the user hit cancel.");
   } else {
+    input.stop();
     filename = selection.getAbsolutePath();
     input = new VideofileInput(this, filename);
     euglenaList = new ArrayList<Euglena>();

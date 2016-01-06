@@ -1,5 +1,7 @@
 private class InputDevice {
   public int width, height;
+  public InputDevice() {
+  }
   public PImage getNextImage() {
     return null;
   }
