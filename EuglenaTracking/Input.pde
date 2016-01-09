@@ -1,6 +1,7 @@
 private class InputDevice {
   public int width, height;
   public InputDevice() {
+    euglenaCounter = 0;
   }
   public PImage getNextImage() {
     return null;

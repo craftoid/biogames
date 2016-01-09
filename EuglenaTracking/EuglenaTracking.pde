@@ -54,7 +54,7 @@ public void setup() {
   //input = new CameraInput(this, webcamWidth, webcamHeight);
   //opencv = new OpenCV(this, webcamWidth, webcamHeight);
   input = new InputDevice();
-  opencv = new OpenCV(this, width, height);
+  opencv = new OpenCV(this, input.width, input.height);
   euglenaList = new ArrayList<Euglena>();
   oscP5 = new OscP5(this, 8001);
   oscTargetHost = new NetAddress(oscTargetIP, 8000);
@@ -141,12 +141,12 @@ void sendOSCData() {
   for (Euglena e : euglenaList) {
     float[] euglenaOSCdata = new float[7];
     euglenaOSCdata[0] = e.id;
-    euglenaOSCdata[1] = e.x;
-    euglenaOSCdata[2] = e.y;
-    euglenaOSCdata[3] = e.width;  // width of bounding box
-    euglenaOSCdata[4] = e.height;  // height of bounding box
-    euglenaOSCdata[5] = e.dx;  // dx
-    euglenaOSCdata[6] = e.dy;  // dy
+    euglenaOSCdata[1] = e.x / input.width;
+    euglenaOSCdata[2] = e.y / input.width;
+    euglenaOSCdata[3] = e.width / (float)input.width;  // width of bounding box
+    euglenaOSCdata[4] = e.height / (float)input.width;;  // height of bounding box
+    euglenaOSCdata[5] = e.dx / input.width;  // dx
+    euglenaOSCdata[6] = e.dy / input.width;  // dy
     OscMessage euglenaMSG = new OscMessage("/euglena");
     euglenaMSG.add(euglenaOSCdata);
     oscP5.send(euglenaMSG, oscTargetHost);

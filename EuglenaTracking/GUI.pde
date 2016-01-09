@@ -93,19 +93,20 @@ void inputSelector(int a) {
   case 1:
     input.stop();
     input = new CameraInput(this, webcamWidth, webcamHeight);
-    opencv = new OpenCV(this, webcamWidth, webcamHeight);
+    opencv = new OpenCV(this, input.width, input.height);
     euglenaList = new ArrayList<Euglena>();
     background(0);
     break;
   case 2:
     input.stop();
     input = new EOSInput(this);
+    opencv = new OpenCV(this, input.width, input.height);
     euglenaList = new ArrayList<Euglena>();
     break;
   }
 }
 
-/** Necessary because inputSelector is called again on next click if no mouseReleased has been registers -- which happens when a file dialog is directly opened by inputSelector :( */
+/** Necessary because inputSelector is called again on next click if no mouseReleased has been registered -- which happens when a file dialog is directly opened by inputSelector :( */
 void mouseReleased() {
   if (fileDialogTrigger) {
     fileDialogTrigger = false;
@@ -124,6 +125,7 @@ void fileSelected(File selection) {
     input.stop();
     filename = selection.getAbsolutePath();
     input = new VideofileInput(this, filename);
+    opencv = new OpenCV(this, input.width, input.height);
     euglenaList = new ArrayList<Euglena>();
     guiControl.get(RadioButton.class, "inputSelector").getItem(0).setLabel("File: "+selection.getName());
   }
