@@ -27,7 +27,7 @@ int syphonHeight = 680;
 int webcamWidth = 1920;
 int webcamHeight = 1080;
 
-String filename = "";
+String filename = "Euglena_short.mov";
 
 PImage inputImage;
 PGraphics canvas;
@@ -45,15 +45,16 @@ boolean displayInput = true;
 float mdx = 0;  // mean x-movement
 float mdy = 0;  // mean y-movement
 
-public void setup() {
+void settings() {
   size(displayWidth, displayHeight, P3D);
+  PJOGL.profile = 1;
+}
+
+public void setup() {
   surface.setResizable(true);
-  // uncomment for startup input device of your choice
-  //input = new VideofileInput(this, filename);
-  //opencv = new OpenCV(this, 1920, 1080);
-  //input = new CameraInput(this, webcamWidth, webcamHeight);
-  //opencv = new OpenCV(this, webcamWidth, webcamHeight);
-  input = new InputDevice();
+  input = new VideofileInput(this, filename);
+  // uncomment for start without input
+  //input = new InputDevice();
   opencv = new OpenCV(this, input.width, input.height);
   euglenaList = new ArrayList<Euglena>();
   oscP5 = new OscP5(this, 8001);
@@ -65,7 +66,7 @@ public void setup() {
 public void draw() {
   background(0);
   inputImage = input.getNextImage();
-  if (inputImage != null) {
+  if (inputImage != null && opencv!=null) {
     trackEuglena();
   }
   updateGUILabels();

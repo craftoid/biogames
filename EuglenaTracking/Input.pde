@@ -2,6 +2,8 @@ private class InputDevice {
   public int width, height;
   public InputDevice() {
     euglenaCounter = 0;
+    opencv = null;
+    euglenaList = new ArrayList<Euglena>();
   }
   public PImage getNextImage() {
     return null;
@@ -47,14 +49,17 @@ private class VideofileInput extends InputDevice {
 private class EOSInput extends InputDevice {
   SyphonClient eos;
   public EOSInput(PApplet parent) {
-    eos = new SyphonClient(parent, "Camera Live", "Canon EOS 5D Mark II");
-    this.width = syphonWidth;
+    eos = new SyphonClient(parent);
+    this.width = syphonWidth ;
     this.height = syphonHeight;
   }
   public PImage getNextImage() {
     if (eos.newFrame()) {
       return eos.getImage(inputImage);
     } else return null;
+  }
+  public void stop() {
+    eos.stop();
   }
 }
 
@@ -63,8 +68,7 @@ void movieEvent(Movie m) {
   if (input.width==0) {
     input.width = m.width;
     input.height = m.height;
-    println("W&H is "+input.width+", "+input.height);
-    opencv = new OpenCV(this, 1920, 1080);
+    opencv = new OpenCV(this, input.width, input.height);
   }
 }
 

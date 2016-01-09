@@ -47,6 +47,7 @@ void createGUI() {
     .addItem("File: "+filename, 0)
     .addItem("Webcam", 1)
     .addItem("Syphon", 2);
+  /*
   guiControl.addNumberbox("syphonWidth")
     .setPosition(20, 390)
     .setSize(60, 20)
@@ -57,6 +58,7 @@ void createGUI() {
     .setSize(60, 20)
     .setScrollSensitivity(1.1)
     .setLabel("Syphon height");
+    */
   guiControl.addNumberbox("webcamWidth")
     .setPosition(20, 350)
     .setSize(60, 20)
@@ -94,14 +96,13 @@ void inputSelector(int a) {
     input.stop();
     input = new CameraInput(this, webcamWidth, webcamHeight);
     opencv = new OpenCV(this, input.width, input.height);
-    euglenaList = new ArrayList<Euglena>();
+    
     background(0);
     break;
   case 2:
     input.stop();
     input = new EOSInput(this);
     opencv = new OpenCV(this, input.width, input.height);
-    euglenaList = new ArrayList<Euglena>();
     break;
   }
 }
@@ -125,8 +126,7 @@ void fileSelected(File selection) {
     input.stop();
     filename = selection.getAbsolutePath();
     input = new VideofileInput(this, filename);
-    opencv = new OpenCV(this, input.width, input.height);
-    euglenaList = new ArrayList<Euglena>();
+    println("OH: "+input.width);
     guiControl.get(RadioButton.class, "inputSelector").getItem(0).setLabel("File: "+selection.getName());
   }
 }
